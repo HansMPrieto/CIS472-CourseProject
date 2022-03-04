@@ -1,0 +1,9 @@
+3/3/2022
+- refactored working directory
+    * notable changes:
+        > models directory separated into .py and notebook files for easier importing
+        > 'Data preprocessing' renamed to 'preprocessing'
+        > training/ directory
+- added ibrahim dataset notebook
+    * includes vgg16 training on ibrahim dataset
+    * ibrahim dataset class
