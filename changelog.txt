@@ -1,4 +1,6 @@
 3/3/2022
+
+Evan Podrabsky
 - refactored working directory
     * notable changes:
         > models directory separated into .py and notebook files for easier importing
@@ -7,3 +9,8 @@
 - added ibrahim dataset notebook
     * includes vgg16 training on ibrahim dataset
     * ibrahim dataset class
+    
+Hans Prieto
+- added qut dataset notebook
+    * includes lenet training on qut dataset
+    * qut dataset class
