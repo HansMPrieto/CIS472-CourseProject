@@ -21,4 +21,5 @@ Vince Qiu
     * include pytoch file
     * screen shot
     * still need to work on
+- updated new version of load data and data augmentation file 
 ---------------------------------------------------------------------------------------------
