@@ -23,7 +23,7 @@ class VGG16(nn.Module):
         nn.init.kaiming_uniform_(self.conv_4b.weight)
         self.relu = nn.ReLU(True)
         self.pool = nn.MaxPool2d(2, 2)
-        self.linear_1 = nn.Linear(512*2*2, hidden_features)
+        self.linear_1 = nn.Linear(512*14*14, hidden_features)
         self.linear_2 = nn.Linear(hidden_features, hidden_features)
         self.linear_3 = nn.Linear(hidden_features, nout)
         self.drop = nn.Dropout()
@@ -33,40 +33,28 @@ class VGG16(nn.Module):
         self.batchnorm_512 = nn.BatchNorm2d(512)
         
     def forward(self, x):
-#         print(x.shape)
         x = self.relu(self.conv_1a(x))
         x = self.relu(self.conv_1b(x))
         x = self.pool(x) # 64x16x16
-#         print(x.shape)
         x = self.batchnorm_64(x)
         x = self.relu(self.conv_2a(x))
         x = self.relu(self.conv_2b(x))
         x = self.pool(x) # 128x8x8
-#         print(x.shape)
         x = self.batchnorm_128(x)
         x = self.relu(self.conv_3a(x))
         x = self.relu(self.conv_3b(x))
         x = self.relu(self.conv_3b(x))
         x = self.pool(x) # 256x4x4
-#         print(x.shape)
         x = self.batchnorm_256(x)
         x = self.relu(self.conv_4a(x))
         x = self.relu(self.conv_4b(x))
         x = self.relu(self.conv_4b(x))
         x = self.pool(x) # 512x2x2
-#         print(x.shape)
         x = self.batchnorm_512(x)
-#         x = self.relu(self.conv_4b(x))
-#         x = self.relu(self.conv_4b(x))
-#         x = self.relu(self.conv_4b(x))
-#         x = self.pool(x)
-#         x = self.batchnorm_512(x)
         x = x.view(x.shape[0], -1)
         x = self.relu(self.linear_1(x))
         if self.dropout:
             x = self.drop(x)
         x = self.relu(self.linear_2(x))
-        if self.dropout:
-            x = self.drop(x)
         x = self.linear_3(x)
         return x
